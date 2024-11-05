@@ -6,19 +6,19 @@
 
 <form action="/insert_course" method="post">
   <div>
-    <label for="title_box">
+    <label for="query_title">
       Title
     </label>
 
-    <input type="text" id="title_b" name="q_title">
+    <input type="text" id="query_title" name="query_title">
   </div>
 
   <div>
-    <label for="term_offered_box">
+    <label for="query_term">
       Term offered
     </label>
 
-    <input type="text" id="term_offered_box" name="query_term">
+    <input type="text" id="query_term" name="query_term">
   </div>
 
   <div>
@@ -64,7 +64,7 @@
     </th>
   </tr>
 
-  <% @course.each do |course| %>
+  <% @courses.each do |course| %>
     <tr>
       <td>
         <%= course.id %>
@@ -79,12 +79,12 @@
       </td>
 
       <td>
-        <% department = department.where({ :id => course.department_id }).at(0) %>
+        <% department = Department.find(course.department_id) %>
         <a href="/departments/<%= department.id %>"><%= department.name %></a>
       </td>
 
       <td>
-        <a href="/courses/<%= @course.id %>">
+        <a href="/courses/<%= course.id %>">
           Show details
         </a>
       </td>
